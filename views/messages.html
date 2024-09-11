@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messages</title>
+</head>
+<body>
+    <h1>Messages</h1>
+    <form action="/messages" method="POST">
+        <input type="text" name="message" placeholder="Type your message" required>
+        <button type="submit">Send</button>
+    </form>
+    <h2>All Messages</h2>
+    <ul id="messageList"></ul>
+    <a href="/logout">Logout</a>
+
+    <script>
+        const messages = <?php echo json_encode($messages); ?>;
+        const messageList = document.getElementById('messageList');
+
+        messages.forEach(message => {
+            const li = document.createElement('li');
+            li.textContent = `${message.user}: ${message.message}`;
+            messageList.appendChild(li);
+        });
+    </script>
+</body>
+</html>
